@@ -22,7 +22,7 @@ scheduler.add_job(
 refresh_profile,
 'cron',
 hour=10,
-minute=0
+minute=30
 )
 
 scheduler.add_job(
