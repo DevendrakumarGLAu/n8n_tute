@@ -27,7 +27,7 @@ scheduler.add_job(
 refresh_profile,
 'cron',
 hour=9,
-minute=30
+minute=50
 )
 
 # REFRESH PROFILE AT 2:30 PM
