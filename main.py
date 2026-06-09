@@ -1,8 +1,10 @@
+import threading
+
 from fastapi import FastAPI
 from dotenv import load_dotenv
 import os
-
-from naukri import apply_jobs
+import scheduler
+from naukri import apply_jobs, auto_apply_loop
 
 load_dotenv()
 
@@ -25,4 +27,15 @@ def run_apply_jobs():
     result = apply_jobs()
 
     return result
+@app.get("/start-auto-apply")
+def start_auto_apply():
+    thread = threading.Thread(
+        target=auto_apply_loop
+    )
+
+    thread.start()
+
+    return {
+        "message": "Auto apply started"
+    }
 

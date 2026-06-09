@@ -1,15 +1,9 @@
-# automation-api\main.py
-
 from playwright.sync_api import sync_playwright
-import os
-from dotenv import load_dotenv
+import time
 
-load_dotenv()
+def apply_single_job():
+    print("Applying one job")
 
-NAUKRI_EMAIL = os.getenv("NAUKRI_EMAIL")
-NAUKRI_PASSWORD = os.getenv("NAUKRI_PASSWORD")
-
-def apply_jobs():
     with sync_playwright() as p:
 
         browser = p.chromium.launch(
@@ -25,13 +19,65 @@ def apply_jobs():
 
         page.goto("https://www.naukri.com")
 
-        print("Opened Naukri")
+        time.sleep(5)
 
-        # Login logic here
+        # APPLY LOGIC HERE
 
         browser.close()
 
-    return {
-        "status": "success"
-    }
-    # ```
+    print("Job Applied")
+
+def refresh_profile():
+
+    print("Refreshing profile")
+
+    with sync_playwright() as p:
+
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage"
+            ]
+        )
+
+        page = browser.new_page()
+
+        page.goto("https://www.naukri.com")
+
+        time.sleep(5)
+
+        # REFRESH PROFILE LOGIC
+
+        browser.close()
+
+    print("Profile Refreshed")
+
+
+def update_application_status():
+
+    print("Updating status")
+
+    with sync_playwright() as p:
+
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage"
+            ]
+        )
+
+        page = browser.new_page()
+
+        page.goto("https://www.naukri.com")
+
+        time.sleep(5)
+
+        # STATUS UPDATE LOGIC
+
+        browser.close()
+
+    print("Status Updated")

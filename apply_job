@@ -1,0 +1,5 @@
+from naukri import apply_single_job
+
+result = apply_single_job()
+
+print(result)
