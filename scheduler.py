@@ -1,4 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
+
 from naukri import (
 apply_single_job,
 refresh_profile,
@@ -6,14 +7,8 @@ update_application_status
 )
 
 scheduler = BackgroundScheduler()
-
-from pytz import timezone
-
-scheduler = BackgroundScheduler(
-    timezone=timezone("Asia/Kolkata")
-)
-
-# APPLY 1 JOB EVERY 5 MINUTES
+print("SCHEDULER LOADED")
+# APPLY EVERY 5 MIN
 
 scheduler.add_job(
 apply_single_job,
@@ -21,16 +16,14 @@ apply_single_job,
 minutes=5
 )
 
-# REFRESH PROFILE AT 9 AM
+# REFRESH PROFILE
 
 scheduler.add_job(
 refresh_profile,
 'cron',
-hour=9,
-minute=50
+hour=10,
+minute=0
 )
-
-# REFRESH PROFILE AT 2:30 PM
 
 scheduler.add_job(
 refresh_profile,
@@ -39,7 +32,7 @@ hour=14,
 minute=30
 )
 
-# UPDATE STATUS AT 8 PM
+# UPDATE STATUS
 
 scheduler.add_job(
 update_application_status,
@@ -49,3 +42,5 @@ minute=0
 )
 
 scheduler.start()
+
+print("Scheduler Started")
